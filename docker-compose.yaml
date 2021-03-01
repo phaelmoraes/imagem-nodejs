@@ -5,7 +5,7 @@ services:
     build:
       context: ./nodejs
     container_name: app_node
-    entrypoint: dockerize --wait tcp://db:3306 -timeout 30s node src/index.js
+    entrypoint: dockerize --wait tcp://db:3306 -timeout 10s node src/index.js
     networks:
       - nodenet
     depends_on: 
