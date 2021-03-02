@@ -5,6 +5,8 @@ services:
     build:
       context: ./nodejs
     container_name: app_node
+    entrypoint: dockerize --wait tcp://db_node:3306 -timeout 40s node src/index.js
+    tty: true
     networks:
       - nodenet
     depends_on: 
@@ -24,7 +26,7 @@ services:
   proxy:
       build:
         context: ./proxy
-      container_name: proxy_node 
+      container_name: proxy_node
       ports:
         - 8080:80
       networks:

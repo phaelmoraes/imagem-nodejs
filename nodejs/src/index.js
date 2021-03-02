@@ -48,11 +48,10 @@ app.get("/", async (req, res) => {
   let people = [["Raphael Moraes"]];
   let html = `<h1>Full Cycle Rocks!</h1><ul>`;
 
-  await Promise.all([
-    createPeopleTable(), 
-    storePeople(people)
-  ]);
-
+  await createPeopleTable().then(()=>{
+    storePeople(people);
+  }) 
+  
   await getPeople().then((people) => {
     people.forEach((p) => {
       html += `<li>${p.name}</li>`;
